@@ -5,6 +5,7 @@ import time
 from discord.ext import commands
 from settings import DISCORD_TOKEN
 from core.nations import Nations
+from core.wars import Wars
 
 class Bot(commands.Bot):
     def __init__(self, **options):
@@ -13,6 +14,7 @@ class Bot(commands.Bot):
 
         super().add_command(self.ping)
         super().add_command(self.display_nation)
+        super().add_command(self.display_nation_wars)
 
     @classmethod
     def start_bot(bot, token=None):
@@ -47,8 +49,8 @@ class Bot(commands.Bot):
     async def ping(self):
         await self.send('Pong!')
 
-    @commands.command()
-    async def find(self, nation_id):
+    @commands.command(aliases=['find'])
+    async def display_nation_in_aa(self, nation_id):
         await self.send(f'The nation id youre looking for is: {nation_id}. {round(self.latency*1000)}ms')
 
     @commands.command(aliases=['nation'])
@@ -58,6 +60,8 @@ class Bot(commands.Bot):
         Args:
             nation_id (int): Unique ID of nation get info
         """
+        before = time.monotonic()
+
         nation_info = Nations().find_nation(nation_id)
 
         if nation_info['vmode'] != '0':
@@ -109,7 +113,46 @@ class Bot(commands.Bot):
             inline=True
         )
 
-        embed.set_footer(text=f'Latency: WIPms') # self.latency doesn't work, need to find an alternative
+        embed.set_footer(text=f'{int((time.monotonic() - before) * 1000)}ms')
+
+        return await self.send(embed=embed)
+
+    @commands.command(aliases=['wars'])
+    async def display_nation_wars(self, nation_id):
+        """Display a nation's current wars
+        
+        Args:
+            nation_id (int): Unique ID of nation get info
+        """
+        before = time.monotonic()
+
+        nation_info = Nations().find_nation(nation_id)
+        offensive_wars = Wars().show_offensive_wars(nation_info['offensivewar_ids'])
+        defensive_wars = Wars().show_defensive_wars(nation_info['defensivewar_ids'])
+
+        embed = discord.Embed(
+            color=discord.Color.orange(),
+        )
+
+        embed.set_author(
+            name=f'{nation_info["name"]} ({nation_info["alliance"]})',
+            url=f'https://politicsandwar.com/nation/id={nation_id}',
+            icon_url=nation_info['flagurl']
+        )
+
+        embed.add_field(
+            name=f'Offensive Wars ({nation_info["offensivewars"]}/5)',
+            value='\n'.join([war for war in offensive_wars]),
+            inline=False
+        )
+
+        embed.add_field(
+            name=f'Defensive Wars ({nation_info["defensivewars"]}/3)',
+            value='\n'.join([war for war in defensive_wars]),
+            inline=False
+        )
+
+        embed.set_footer(text=f'{int((time.monotonic() - before) * 1000)}ms')
 
         return await self.send(embed=embed)
 
