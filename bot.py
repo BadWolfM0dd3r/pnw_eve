@@ -61,8 +61,14 @@ class Bot(commands.Bot):
         """
         result = Nations().find_nation(nation_id)
 
+        if result['vmode'] != '0':
+            vacation_mode = f'🏖 Out of Vacation mode in {result["vmode"]} turns'
+        else:
+            vacation_mode = ''
+
         embed = discord.Embed(
-            color=discord.Color.orange()
+            description=vacation_mode,
+            color=discord.Color.orange(),
         )
 
         embed.set_author(
@@ -114,7 +120,7 @@ class Bot(commands.Bot):
 
     @commands.command(pass_context=True)
     async def help(self):
-        author = ctx.message.author
+        author = self.message.author
 
         embed = discord.Embed(
             colour=discord.Colour.blue()
