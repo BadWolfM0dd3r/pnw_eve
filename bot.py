@@ -56,13 +56,12 @@ class Bot(commands.Bot):
         """Display a nation's info
         
         Args:
-            ctx (commands.Context): Represents the context in which a command is being invoked under
             nation_id (int): Unique ID of nation get info
         """
-        result = Nations().find_nation(nation_id)
+        nation_info = Nations().find_nation(nation_id)
 
-        if result['vmode'] != '0':
-            vacation_mode = f'🏖 Out of Vacation mode in {result["vmode"]} turns'
+        if nation_info['vmode'] != '0':
+            vacation_mode = f'🏖 Out of Vacation mode in {nation_info["vmode"]} turns'
         else:
             vacation_mode = ''
 
@@ -72,20 +71,20 @@ class Bot(commands.Bot):
         )
 
         embed.set_author(
-            name=f'{result["name"]} ({result["alliance"]}) - Active {result["minutessinceactive"]//60}hrs ago',
+            name=f'{nation_info["name"]} ({nation_info["alliance"]}) - Active {nation_info["minutessinceactive"]//60}hrs ago',
             url=f'https://politicsandwar.com/nation/id={nation_id}',
-            icon_url=result['flagurl']
+            icon_url=nation_info['flagurl']
         )
 
         embed.add_field(
             name='Stats',
             value=f'''
-                {result["cities"]} cities
-                {result["totalinfrastructure"]} infra
-                {result["landarea"]} land
-                {result["score"]} nation score
-                {result["offensivewars"]} off wars
-                {result["defensivewars"]} def wars
+                {nation_info["cities"]} cities
+                {nation_info["totalinfrastructure"]} infra
+                {nation_info["landarea"]} land
+                {nation_info["score"]} nation score
+                {nation_info["offensivewars"]} off wars
+                {nation_info["defensivewars"]} def wars
             ''',
             inline=True
         )
@@ -93,10 +92,10 @@ class Bot(commands.Bot):
         embed.add_field(
             name='Military',
             value=f'''
-                🛡 {result["soldiers"]}
-                🚍 {result["tanks"]}
-                🛩 {result["aircraft"]}
-                🚢 {result["ships"]}
+                🛡 {nation_info["soldiers"]}
+                🚍 {nation_info["tanks"]}
+                🛩 {nation_info["aircraft"]}
+                🚢 {nation_info["ships"]}
             ''',
             inline=True
         )
@@ -104,8 +103,8 @@ class Bot(commands.Bot):
         embed.add_field(
             name='Policies',
             value=f'''
-                {result["domestic_policy"]}
-                {result["war_policy"]}
+                {nation_info["domestic_policy"]}
+                {nation_info["war_policy"]}
             ''',
             inline=True
         )
