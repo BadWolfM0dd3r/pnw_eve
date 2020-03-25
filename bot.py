@@ -6,6 +6,8 @@ from discord.ext import commands
 from settings import DISCORD_TOKEN
 from core.nations import Nations
 from core.wars import Wars
+from embed.display_nation import DisplayNation
+from embed.display_nation_wars import DisplayNationWars
 
 class Bot(commands.Bot):
     def __init__(self, **options):
@@ -64,54 +66,7 @@ class Bot(commands.Bot):
 
         nation_info = Nations().find_nation(nation_id)
 
-        if nation_info['vmode'] != '0':
-            vacation_mode = f'🏖 Out of Vacation mode in {nation_info["vmode"]} turns'
-        else:
-            vacation_mode = ''
-
-        embed = discord.Embed(
-            description=vacation_mode,
-            color=discord.Color.orange(),
-        )
-
-        embed.set_author(
-            name=f'{nation_info["name"]} ({nation_info["alliance"]}) - Active {nation_info["minutessinceactive"]//60}hrs ago',
-            url=f'https://politicsandwar.com/nation/id={nation_id}',
-            icon_url=nation_info['flagurl']
-        )
-
-        embed.add_field(
-            name='Stats',
-            value=f'''
-                {nation_info["cities"]} cities
-                {nation_info["totalinfrastructure"]} infra
-                {nation_info["landarea"]} land
-                {nation_info["score"]} nation score
-                {nation_info["offensivewars"]} off wars
-                {nation_info["defensivewars"]} def wars
-            ''',
-            inline=True
-        )
-
-        embed.add_field(
-            name='Military',
-            value=f'''
-                🛡 {nation_info["soldiers"]}
-                🚍 {nation_info["tanks"]}
-                🛩 {nation_info["aircraft"]}
-                🚢 {nation_info["ships"]}
-            ''',
-            inline=True
-        )
-        
-        embed.add_field(
-            name='Policies',
-            value=f'''
-                {nation_info["domestic_policy"]}
-                {nation_info["war_policy"]}
-            ''',
-            inline=True
-        )
+        embed = DisplayNation().display(nation_info)        
 
         embed.set_footer(text=f'{int((time.monotonic() - before) * 1000)}ms')
 
@@ -127,30 +82,8 @@ class Bot(commands.Bot):
         before = time.monotonic()
 
         nation_info = Nations().find_nation(nation_id)
-        offensive_wars = Wars().show_offensive_wars(nation_info['offensivewar_ids'])
-        defensive_wars = Wars().show_defensive_wars(nation_info['defensivewar_ids'])
-
-        embed = discord.Embed(
-            color=discord.Color.orange(),
-        )
-
-        embed.set_author(
-            name=f'{nation_info["name"]} ({nation_info["alliance"]})',
-            url=f'https://politicsandwar.com/nation/id={nation_id}',
-            icon_url=nation_info['flagurl']
-        )
-
-        embed.add_field(
-            name=f'Offensive Wars ({nation_info["offensivewars"]}/5)',
-            value='\n'.join([war for war in offensive_wars]),
-            inline=False
-        )
-
-        embed.add_field(
-            name=f'Defensive Wars ({nation_info["defensivewars"]}/3)',
-            value='\n'.join([war for war in defensive_wars]),
-            inline=False
-        )
+        
+        embed = DisplayNationWars().display(nation_info)
 
         embed.set_footer(text=f'{int((time.monotonic() - before) * 1000)}ms')
 
