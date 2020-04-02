@@ -1,0 +1,263 @@
+{
+    "2": {
+        "Gas": 80,
+        "Munitions": 80,
+        "Steel": 100,
+        "Aluminum": 100,
+        "Food": 2000,
+        "Fuel": 50,
+        "Cash": 500000
+    },
+    "3": {
+        "Gas": 100,
+        "Munitions": 150,
+        "Steel": 100,
+        "Aluminum": 150,
+        "Food": 3000,
+        "Fuel": 75,
+        "Cash": 500000
+    },
+    "4": {
+        "Gas": 200,
+        "Munitions": 200,
+        "Steel": 200,
+        "Aluminum": 200,
+        "Food": 4000,
+        "Fuel": 100,
+        "Cash": 600000
+    },
+    "5": {
+        "Gas": 300,
+        "Munitions": 400,
+        "Steel": 250,
+        "Aluminum": 300,
+        "Food": 6000,
+        "Fuel": 150,
+        "Cash": 800000
+    },
+    "6": {
+        "Gas": 600,
+        "Munitions": 600,
+        "Steel": 400,
+        "Aluminum": 500,
+        "Food": 8000,
+        "Fuel": 350,
+        "Cash": 800000
+    },
+    "7": {
+        "Gas": 800,
+        "Munitions": 800,
+        "Steel": 500,
+        "Aluminum": 700,
+        "Food": 12000,
+        "Fuel": 500,
+        "Cash": 1000000
+    },
+    "8": {
+        "Gas": 1000,
+        "Munitions": 1200,
+        "Steel": 700,
+        "Aluminum": 1000,
+        "Food": 18000,
+        "Fuel": 600,
+        "Cash": 1000000
+    },
+    "9": {
+        "Gas": 1800,
+        "Munitions": 1800,
+        "Steel": 2000,
+        "Aluminum": 3000,
+        "Food": 22000,
+        "Fuel": 700,
+        "Cash": 2000000
+    },
+    "10": {
+        "Gas": 2400,
+        "Munitions": 2600,
+        "Steel": 3000,
+        "Aluminum": 6000,
+        "Food": 26000,
+        "Fuel": 800,
+        "Cash": 4000000
+    },
+    "11": {
+        "Gas": 2800,
+        "Munitions": 3200,
+        "Steel": 4000,
+        "Aluminum": 8000,
+        "Food": 30000,
+        "Fuel": 900,
+        "Cash": 5000000
+    },
+    "12": {
+        "Gas": 4000,
+        "Munitions": 4400,
+        "Steel": 8000,
+        "Aluminum": 9000,
+        "Food": 35000,
+        "Fuel": 1100,
+        "Cash": 6000000
+    },
+    "13": {
+        "Gas": 5000,
+        "Munitions": 5600,
+        "Steel": 10000,
+        "Aluminum": 11000,
+        "Food": 40000,
+        "Fuel": 1200,
+        "Cash": 7000000
+    },
+    "14": {
+        "Gas": 7000,
+        "Munitions": 8000,
+        "Steel": 12000,
+        "Aluminum": 13000,
+        "Food": 42000,
+        "Fuel": 1400,
+        "Cash": 9000000
+    },
+    "15": {
+        "Gas": 10000,
+        "Munitions": 12000,
+        "Steel": 14000,
+        "Aluminum": 15000,
+        "Food": 46000,
+        "Fuel": 1500,
+        "Cash": 10000000
+    },
+    "16": {
+        "Gas": 12000,
+        "Munitions": 15000,
+        "Steel": 16000,
+        "Aluminum": 17000,
+        "Food": 48000,
+        "Fuel": 1600,
+        "Cash": 11000000
+    },
+    "17": {
+        "Gas": 15000,
+        "Munitions": 18000,
+        "Steel": 17000,
+        "Aluminum": 19000,
+        "Food": 52000,
+        "Fuel": 1700,
+        "Cash": 12000000
+    },
+    "18": {
+        "Gas": 18000,
+        "Munitions": 21000,
+        "Steel": 18000,
+        "Aluminum": 21000,
+        "Food": 54000,
+        "Fuel": 1800,
+        "Cash": 13000000
+    },
+    "19": {
+        "Gas": 21000,
+        "Munitions": 25000,
+        "Steel": 19000,
+        "Aluminum": 22000,
+        "Food": 58000,
+        "Fuel": 1900,
+        "Cash": 14000000
+    },
+    "20": {
+        "Gas": 25000,
+        "Munitions": 30000,
+        "Steel": 20000,
+        "Aluminum": 24000,
+        "Food": 60000,
+        "Fuel": 2000,
+        "Cash": 15000000
+    },
+    "21": {
+        "Gas": 30000,
+        "Munitions": 35000,
+        "Steel": 21000,
+        "Aluminum": 26000,
+        "Food": 64000,
+        "Fuel": 2100,
+        "Cash": 20000000
+    },
+    "22": {
+        "Gas": 35000,
+        "Munitions": 42000,
+        "Steel": 22000,
+        "Aluminum": 28000,
+        "Food": 66000,
+        "Fuel": 2200,
+        "Cash": 22000000
+    },
+    "23": {
+        "Gas": 44000,
+        "Munitions": 50000,
+        "Steel": 24000,
+        "Aluminum": 30000,
+        "Food": 70000,
+        "Fuel": 2300,
+        "Cash": 24000000
+    },
+    "24": {
+        "Gas": 53000,
+        "Munitions": 68000,
+        "Steel": 25000,
+        "Aluminum": 32000,
+        "Food": 72000,
+        "Fuel": 2400,
+        "Cash": 36000000
+    },
+    "25": {
+        "Gas": 67000,
+        "Munitions": 75000,
+        "Steel": 26000,
+        "Aluminum": 35000,
+        "Food": 76000,
+        "Fuel": 2500,
+        "Cash": 38000000
+    },
+    "26": {
+        "Gas": 74000,
+        "Munitions": 80000,
+        "Steel": 28000,
+        "Aluminum": 38000,
+        "Food": 78000,
+        "Fuel": 2600,
+        "Cash": 41000000
+    },
+    "27": {
+        "Gas": 76000,
+        "Munitions": 82000,
+        "Steel": 30000,
+        "Aluminum": 41000,
+        "Food": 82000,
+        "Fuel": 2700,
+        "Cash": 44000000
+    },
+    "28": {
+        "Gas": 80000,
+        "Munitions": 84000,
+        "Steel": 32000,
+        "Aluminum": 44000,
+        "Food": 84000,
+        "Fuel": 2800,
+        "Cash": 48000000
+    },
+    "29": {
+        "Gas": 82000,
+        "Munitions": 87000,
+        "Steel": 34000,
+        "Aluminum": 47000,
+        "Food": 88000,
+        "Fuel": 2900,
+        "Cash": 52000000
+    },
+    "30": {
+        "Gas": 84000,
+        "Munitions": 90000,
+        "Steel": 36000,
+        "Aluminum": 50000,
+        "Food": 90000,
+        "Fuel": 3000,
+        "Cash": 56000000
+    }
+}

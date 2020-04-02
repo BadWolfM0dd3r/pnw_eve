@@ -6,8 +6,11 @@ from discord.ext import commands
 from settings import DISCORD_TOKEN
 from core.nations import Nations
 from core.wars import Wars
+from core.warchest import WarChest
+from embed.display_error import DisplayError
 from embed.display_nation import DisplayNation
 from embed.display_nation_wars import DisplayNationWars
+from embed.display_warchest import DisplayWarChest
 
 class Bot(commands.Bot):
     def __init__(self, **options):
@@ -17,6 +20,7 @@ class Bot(commands.Bot):
         super().add_command(self.ping)
         super().add_command(self.display_nation)
         super().add_command(self.display_nation_wars)
+        super().add_command(self.display_required_warchest)
 
     @classmethod
     def start_bot(bot, token=None):
@@ -84,6 +88,28 @@ class Bot(commands.Bot):
         nation_info = Nations().find_nation(nation_id)
         
         embed = DisplayNationWars().display(nation_info)
+
+        embed.set_footer(text=f'{int((time.monotonic() - before) * 1000)}ms')
+
+        return await self.send(embed=embed)
+
+    @commands.command(aliases=['chest'])
+    async def display_required_warchest(self, city_count):
+        """Display's a nation required warchest based on city count
+        
+        Args:
+            city_count (int): City count of the nation
+        """
+        before = time.monotonic()
+
+        if int(city_count) < 2 or int(city_count) > 30:
+            embed = DisplayError().display('Only accepting parameters of 2 to 30 cities.')
+
+            return await self.send(embed=embed)
+
+        warchest = WarChest().find_warchest(city_count)
+
+        embed = DisplayWarChest().display(city_count, warchest)
 
         embed.set_footer(text=f'{int((time.monotonic() - before) * 1000)}ms')
 
