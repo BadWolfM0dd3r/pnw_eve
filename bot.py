@@ -11,6 +11,7 @@ from embed.display_error import DisplayError
 from embed.display_nation import DisplayNation
 from embed.display_nation_wars import DisplayNationWars
 from embed.display_warchest import DisplayWarChest
+from embed.display_find_counter import DisplayFindCounter
 
 class Bot(commands.Bot):
     def __init__(self, **options):
@@ -21,6 +22,8 @@ class Bot(commands.Bot):
         super().add_command(self.display_nation)
         super().add_command(self.display_nation_wars)
         super().add_command(self.display_required_warchest)
+        # super().add_command(self.find_raid_target)
+        super().add_command(self.find_counters)
 
     @classmethod
     def start_bot(bot, token=None):
@@ -115,9 +118,44 @@ class Bot(commands.Bot):
 
         return await self.send(embed=embed)
 
-    @commands.command()
-    async def raid(self, nation_id, alliance_id=0):
-        await self.send(f'Raid target is: {nation_id}, member of {alliance_id}. {round(self.latency*1000)}ms')
+    @commands.command(aliases=['counter'])
+    async def find_counters(self, nation_id):
+        """Find an ally nation to counter an aggressor nation
+        
+        Args:
+            nation_id (int): Unique ID of nation to find counter for
+        """
+        before = time.monotonic()
+
+        aggresor_nation = Nations().find_nation(nation_id)
+
+        counters = Wars().counter_targets(aggresor_nation)
+
+        embed = DisplayFindCounter().display(aggresor_nation, counters)
+
+        embed.set_footer(text=f'{int((time.monotonic() - before) * 1000)}ms')
+
+        return await self.send(embed=embed)
+
+    # @commands.command(aliases=['raid'])
+    # async def find_raid_target(self, nation_id, alliance_id=0):
+    #     """Find a raid target based on nation score and provided alliance id
+        
+    #     Args:
+    #         nation_id (int): Unique ID of nation looking for raid targets
+    #         alliance_id (int, optional): Alliance ID of preferred targets. Defaults to 0.
+    #     """
+    #     before = time.monotonic()
+
+    #     nation_info = Nations().find_nation(nation_id)
+
+    #     targets = Wars().raid_targets(nation_info, alliance_id)
+
+    #     # print(targets) # individual print: targets[0]['nationid']
+    #     for target in targets:
+    #         print(f'{target["nationid"]} - {int(target["gdp"]):,}')
+            
+    #     print(f'{int((time.monotonic() - before) * 1000)}ms')
 
     @commands.command(pass_context=True)
     async def help(self):
