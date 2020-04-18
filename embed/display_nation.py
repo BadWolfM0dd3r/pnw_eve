@@ -21,7 +21,8 @@ class DisplayNation:
 
         embed.add_field(
             name='Statistics',
-            value=f'''{nation_info["cities"]} cities
+            value=f'''
+                {nation_info["cities"]} cities
                 {float(nation_info["totalinfrastructure"]):,.2f} infra
                 {int(nation_info["landarea"]):,} land
                 {float(nation_info["score"]):,.2f} nation score
