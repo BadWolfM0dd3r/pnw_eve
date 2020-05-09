@@ -107,11 +107,12 @@ class Wars:
 
         ally_nations = [i for i in ally_nation if i['color'] != 'beige'
             and i['vacmode'] == '0'
-            and i['offensivewars'] < 5
-            # and i['minutessinceactive'] < 4320
-            and i['cities'] >= aggresor_nation['cities']
+            and (float(i['score']) >= agg_defend_min and float(i['score']) <= agg_defend_max) # war range
             and i['military_score'] >= aggresor_nation['military_score']
-            and float(i['score']) >= agg_defend_min and float(i['score']) <= agg_defend_max]
+            and i['cities'] >= aggresor_nation['cities']
+            and i['offensivewars'] < 5
+            and i['minutessinceactive'] < 1440
+        ]
 
         sorted_nations = sorted(ally_nations, key=lambda i: (i['cities'], i['military_score']), reverse=True)
 
